@@ -1,46 +1,52 @@
 package it.unibo.es1;
 
+//import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LogicsImpl implements Logics {
+	private final List<Integer> values;
 
-	public LogicsImpl(int size) {
-		//TODO Auto-generated constructor stub
+	public LogicsImpl(final int size) {
+		this.values = IntStream.range(0, size)
+				.mapToObj(o -> 0)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'size'");
+		return this.values.size();
 	}
 
 	@Override
 	public List<Integer> values() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'values'");
+		return List.copyOf(this.values);
 	}
 
 	@Override
 	public List<Boolean> enablings() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'enablings'");
+		return this.values.stream()
+				.map(i -> (i.equals(this.values.size()) ? false : true))
+				.toList();
 	}
 
 	@Override
 	public int hit(int elem) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'hit'");
+		return this.values.set(elem, this.values.get(elem) + 1 ) + 1;
 	}
 
 	@Override
 	public String result() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'result'");
+		return this.values.stream()
+				.map(String :: valueOf)
+				.map(s -> s.concat(s))
+				.toString();
 	}
 
 	@Override
 	public boolean toQuit() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'toQuit'");
+		return this.values.stream()
+				.allMatch(i -> i.equals(this.values.get(0)));
 	}
 }
