@@ -1,9 +1,13 @@
+//import java.util.ArrayList;
+import java.util.HashMap;
+//import java.util.List;
+import java.util.Map;
 
 public class LogicsImpl implements Logics{
-
+    final Map<Pair<Integer, Integer>, String> buttons;
 
     public LogicsImpl(int size) {
-        //TODO Auto-generated constructor stub
+        buttons = new HashMap<>(size);
     }
 
     @Override
